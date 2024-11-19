@@ -1,14 +1,21 @@
- 
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const contactRoute = require("./routes/contact");
+// server/index.js
+
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const contactRoute = require('./routes/contact');  // Importowanie trasy kontaktowej
 
 const app = express();
-app.use(cors());
-app.use(bodyParser.json());
 
-app.use("/send", contactRoute);
+// Middleware
+app.use(cors());  // Włączenie CORS (jeśli masz frontend na innym porcie)
+app.use(bodyParser.json());  // Obsługuje dane JSON
 
-const PORT = 5000;
-app.listen(PORT, () => console.log(`Server działa na porcie ${PORT}`));
+// Trasa do kontaktu
+app.use('/contact', contactRoute);
+
+// Ustawienie portu
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Serwer działa na porcie ${PORT}`);
+});
