@@ -1,53 +1,167 @@
-# SłodkaChwila – Wizytówka Cukierni
-**SłodkaChwila** to nowoczesna aplikacja internetowa prezentująca ofertę cukierni. Projekt łączy atrakcyjny interfejs z funkcjonalnościami, które ułatwiają klientom przeglądanie oferty i kontakt.
+# Słodka Chwila
 
-Technologie:
+Słodka Chwila to strona wizytówka cukierni, która zapewnia szybki dostęp do kluczowych informacji. Użytkownicy mogą przeglądać menu, aktualności, stronę główną oraz łatwo skontaktować się poprzez formularz wiadomości. Prosty i intuicyjny układ pozwala na wygodne korzystanie z serwisu.
 
-Front-end:
-React + Tailwind CSS: Nowoczesny i responsywny design.
-React Hook Form: Obsługa i walidacja formularzy.
-React Router: Routing między podstronami (/galeria, /kontakt).
-AOS.js: Animacje przewijania.
+---
 
-Back-end:
-Node.js + Express.js: Obsługa API i formularza kontaktowego.
-Nodemailer: Wysyłanie e-maili z formularza.
-Body-parser, CORS: Obsługa zapytań i komunikacja z front-endem.
+## Funkcjonalności
 
-Hosting:
-Front-end: Netlify.
-Back-end: Render/Heroku.
+### Strona Główna
+- Powitanie oraz krótkie wprowadzenie do cukierni.
+- Najnowsze informacje i promocje.
 
-Uruchomienie projektu
+### Menu
+- Pełna oferta produktów cukierni (ciasta, torty, ciasteczka).
+- Informacje o cenach i składnikach produktów.
 
-- Sklonuj repozytorium:
-git clone https://github.com/Mikolaj1921/slodkachwila.git
+### Aktualności
+- Najnowsze wydarzenia, nowe produkty, promocje i specjalne oferty.
 
+### Kontakt
+- Dane kontaktowe: numer telefonu, e-mail, adres fizyczny.
+- Mapka i linki do mediów społecznościowych.
 
-- Zainstaluj zależności:
+### Formularz Kontaktowy
+- Pola: imię, e-mail oraz wiadomość.
+- Szybkie przesyłanie zapytań lub opinii do cukierni.
 
-#Front-end:
+---
 
-cd frontend
-npm install
+## Technologie
 
-#Back-end:
+### Front-end
+- **React**: Tworzenie dynamicznego interfejsu użytkownika.
+- **Tailwind CSS**: Responsywny design i minimalizacja własnego CSS.
+- **React Hook Form**: Intuicyjna obsługa formularzy z walidacją.
+- **React Router**: Routing dla różnych podstron.
+- **AOS.js (Animate On Scroll)**: Animacje wyzwalane podczas przewijania strony.
 
-cd server
-npm install
+### Back-end
+- **Node.js z Express.js**: Obsługa zapytań i zarządzanie formularzami.
+- **Nodemailer**: Wysyłanie e-maili z formularza kontaktowego.
+- **CORS**: Komunikacja między front-endem i back-endem.
 
-#Uruchom aplikację:
+### Hosting
+- **Netlify**: Hosting front-endu (React).
+- **Render**: Hosting back-endu (Node.js).
 
-#Front-end:
-npm start
+---
 
-Back-end:
-node index.js
+## API
 
-#Funkcjonalności
+### Endpointy
+#### Testowy Endpoint
+- **Ścieżka**: `/`
+- **Metoda**: GET
+- **Opis**: Zwraca komunikat "Backend działa poprawnie!".
+- **Przykład odpowiedzi**:
+Backend działa poprawnie!
 
-- Responsywny interfejs.
-- Formularz kontaktowy z wysyłaniem e-maili.
-- Atrakcyjne animacje i przejrzyste podstrony.
+#### Galeria Zdjęć
+- **Ścieżka**: `/photos`
+- **Metoda**: GET
+- **Opis**: Pobiera listę zdjęć z tabeli `photos`.
 
-#Gotowe do wdrożenia na Netlify/Vercel i Render/Heroku. 🎂
+#### Formularz Kontaktowy
+- **Ścieżka**: `/contact`
+- **Metoda**: POST
+- **Opis**: Przyjmuje dane JSON z formularza kontaktowego.
+- **Przykładowe dane**:
+
+```json
+{
+  "name": "Jan Kowalski",
+  "email": "jan.kowalski@example.com",
+  "message": "Chciałbym się dowiedzieć więcej o Waszych usługach."
+}
+```
+
+---
+
+## Google Maps API
+
+- **Ścieżka:** `/api/location`
+- **Metoda:** `GET`
+- **Opis:** Pobiera współrzędne cukierni do wyświetlenia na mapie.
+- **Biblioteka:** Leaflet z OpenStreetMap.
+
+---
+
+## Baza Danych
+
+### Struktura
+
+- **Tabela `photos` (Galeria zdjęć):**
+  - `id` (INT, Primary Key) – ID zdjęcia.
+  - `url` (VARCHAR) – Ścieżka do zdjęcia.
+  - `description` (VARCHAR) – Opis zdjęcia.
+  - `created_at` (TIMESTAMP) – Data dodania.
+
+- **Tabela `messages` (Wiadomości od użytkowników):**
+  - `id` (INT, Primary Key) – ID wiadomości.
+  - `nameSurname` (VARCHAR) – Imię i nazwisko.
+  - `email` (VARCHAR) – Adres e-mail.
+  - `message` (TEXT) – Treść wiadomości.
+  - `created_at` (TIMESTAMP) – Data wysłania.
+
+---
+
+## Instalacja
+
+### Wymagania
+
+- **Node.js:** Do obsługi backendu.
+- **PostgreSQL:** Do zarządzania bazą danych.
+
+### Uruchomienie
+
+1. **Sklonuj repozytorium:**
+    ```bash
+    git clone https://github.com/uzytkownik/slodka-chwila.git
+    ```
+
+2. **Zainstaluj zależności:**
+    - Przejdź do folderu `frontend`:
+      ```bash
+      cd frontend
+      npm install
+      ```
+    - Przejdź do folderu `backend`:
+      ```bash
+      cd ../backend
+      npm install
+      ```
+
+3. **Skonfiguruj zmienne środowiskowe w pliku `.env` w katalogu `backend`:**
+    ```makefile
+    DB_USER=twoja_nazwa_uzytkownika
+    DB_PASSWORD=twoje_haslo
+    DB_HOST=localhost
+    DB_NAME=slodka_chwila
+    DB_PORT=5432
+    ```
+
+4. **Uruchom aplikację:**
+    - **Frontend:**
+      ```bash
+      cd frontend
+      npm start
+      ```
+    - **Backend:**
+      ```bash
+      cd backend
+      node index.js
+      ```
+
+---
+
+## Rozbudowa
+
+- Wdrożenie bazy danych sieciowej (np. AWS RDS lub Google Cloud SQL) i przechowywanie zdjęć w chmurze (np. AWS S3).
+- Rozbudowa galerii zdjęć z możliwością dodawania nowych obrazów przez panel administracyjny.
+
+---
+
+## Autorzy
+
+Mikołaj Melnyk
