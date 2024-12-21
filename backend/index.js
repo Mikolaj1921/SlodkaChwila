@@ -2,6 +2,7 @@ require('dotenv').config(); // Wczytanie zmiennych środowiskowych z pliku .env
 
 const express = require('express');
 const cors = require('cors');
+const photoRoute = require('./routes/photos');
 const contactRoute = require('./routes/contact'); // Importowanie trasy kontaktowej
 const app = express();
 
@@ -34,6 +35,7 @@ app.use((req, res, next) => {
     next();
 });
 
+
 // Endpointy
 
 // Testowy endpoint dla weryfikacji działania serwera
@@ -41,8 +43,10 @@ app.get('/', (req, res) => {
     res.send('Backend działa poprawnie!');
 });
 
-// Trasa do kontaktu
-app.use('/contact', contactRoute);
+// Trasa do kontaktu, zdjęć
+app.use('/contact', contactRoute); // <-- Upewnij się, że ta trasa jest poprawna
+app.use('/photos', photoRoute);
+
 
 // Endpoint do zwracania współrzędnych
 app.get("/api/location", (req, res) => {
@@ -53,6 +57,9 @@ app.get("/api/location", (req, res) => {
     };
     res.json(location);
 });
+
+
+
 
 // Obsługa błędów dla nieznanych tras (404)
 app.use((req, res) => {
